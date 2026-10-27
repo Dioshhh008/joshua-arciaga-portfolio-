@@ -1,5 +1,8 @@
 # Joshua Arciaga — Portfolio
 
+**Live: https://joshuaarciaga.netlify.app** — hosted on Netlify (static client +
+Netlify Function for the contact form), auto-rebuilt from GitHub on every push.
+
 A single-page portfolio for a full-stack web developer and data analyst: a fixed
 sidebar dashboard on desktop, a slide-in drawer on mobile, glassmorphism cards and
 neon purple/blue accents on a deep slate canvas.

@@ -252,14 +252,19 @@ dependensya sa Cloudflare.
 - ✅ **Netlify-ready**: shared logic (`src/lib/contact-delivery.ts`) + Netlify
   Function (`netlify/functions/contact.ts`) + `netlify.toml` + `.gitignore` —
   naka-QA na ang form flow (tsc / vite build / live form submit sa local dev)
+- ✅ **LIVE DEPLOY**: `https://joshuaarciaga.netlify.app` (GitHub + Netlify,
+  2026-10-27) — end-to-end verified ang email sending
 - ✅ `tsc` / `vite build` / postbuild: lahat pumasa; 0 console errors sa QA
 
 ---
 
-## 8. Estado ng hosting — Netlify (code TAPos na, pending ang account + deploy)
+## 8. Hosting — LIVE SA NETLIFY ✅ (deployed 2026-10-27)
 
 Pinili ang **Netlify** bilang host (mas maganda kaysa GitHub Pages dito dahil may
-Netlify Functions — server-side na talaga, hindi pure static). Eto ang estado:
+Netlify Functions — server-side na talaga, hindi pure static).
+
+**LIVE: https://joshuaarciaga.netlify.app**
+**Code: https://github.com/Dioshhh008/joshua-arciaga-portfolio-**
 
 **Tapos na (2026-10-27):**
 - ✅ `src/lib/contact-delivery.ts` — shared validation + Resend delivery
@@ -273,11 +278,17 @@ Netlify Functions — server-side na talaga, hindi pure static). Eto ang estado:
 - ✅ QA: form submit → validasyon + friendly 503 sa local (inexpect, walang
   local key); `tsc` at `vite build` pumasa
 
-**Natitira (lahat button/login lang — walang kulang na code):**
-1. Netlify account → `npx netlify-cli login` (o GitHub sign-in sa UI)
-2. I-deploy: `npx netlify-cli deploy --build --prod` — o i-connect ang GitHub
-   repo para awtomatik na mag-rebuild sa bawat push
-3. I-set ang `RESEND_API_KEY` env var sa Netlify (UI o CLI)
-4. I-test ang form sa live URL — dapat pumasok sa inbox
+**Completed deployment path (reference para susunod na pag-update):**
+1. **Bawat `git push`** sa GitHub repo → awtomatik na magre-rebuild + redeploy
+   sa Netlify (walang manual na hakbang)
+2. Netlify site = repo import; ang `netlify.toml` ang nagsasabi ng build
+   (`npm run build` → publish `dist/client`) at ang `netlify/functions/contact.ts`
+   ay nag-eexpose ng `/api/contact`
+3. `RESEND_API_KEY` = set na (secret, all scopes) sa Site configuration →
+   Environment variables
+4. End-to-end verified: `POST /api/contact` → **200 `{ok:true}`**; live form
+   submit → green success note; totoong email nasa inbox
+5. *(Optional hygiene)* rotate key kung na-expose man: bago key sa resend.com →
+   palitan ang env var value → redeploy
 
 *(Wakas ng dokumento — balikan ito sa pag-deploy at mga susunod na update.)*
