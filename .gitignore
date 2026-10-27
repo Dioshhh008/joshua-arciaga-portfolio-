@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.netlify/
+.wrangler/
+*.local
+
+# Environment/secret files
+.env
+.env.*
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

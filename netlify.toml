@@ -1,0 +1,23 @@
+# Netlify deploy configuration.
+# The static client (React app) is published from the Vite build, while the
+# contact endpoint runs as a Netlify Function (netlify/functions/contact.ts)
+# which publishes itself at /api/contact via `config.path` — same-origin for
+# the form, no CORS setup.
+
+[build]
+  command = "npm run build"
+  publish = "dist/client"
+
+# Client-side app: any unknown path falls back to the SPA shell (static files
+# always take precedence over this rewrite).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Local development: `npx netlify-cli dev` runs the Vite dev server and the
+# Netlify Functions together (it proxies on http://localhost:8888 by default).
+[dev]
+  framework = "#custom"
+  command = "npx vite"
+  targetPort = 3000
